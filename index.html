@@ -1,230 +1,343 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Ticex - Kendi Pazar Yerinizi Bugün Kurun</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ticex - Kendi Pazar Yerinizi Bugün Kurun</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "brand": {
-                            500: '#137fec', // Senin sevdiğin mavi
-                            600: '#0b63c4', // Hover için koyusu
-                        },
-                        "dark": {
-                            900: '#0f172a', // Yazılar için koyu gri (Simsiyah değil)
-                            800: '#1e293b',
-                            500: '#64748b', // Açıklamalar için gri
-                        }
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
                     },
                     fontFamily: {
-                        "sans": ["Inter", "sans-serif"]
+                        "display": ["Inter", "sans-serif"]
                     },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(19, 127, 236, 0.1)', // Hafif mavi gölge
-                    }
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                 },
             },
         }
     </script>
-    <style>
-        /* İmleç Yanıp Sönme Efekti */
-        .cursor::after {
-            content: '|';
-            margin-left: 2px;
-            color: #137fec;
-            animation: blink 1s step-start infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-    </style>
 </head>
-<body class="bg-white text-dark-900 font-sans antialiased overflow-x-hidden">
-
-    <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-slate-100">
-        <div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-            <div class="flex items-center gap-2 cursor-pointer">
-                <div class="w-9 h-9 flex items-center justify-center bg-brand-500 rounded-lg text-white shadow-soft">
-                    <span class="material-symbols-rounded text-[22px]">grid_view</span>
-                </div>
-                <h2 class="text-xl font-black tracking-tight text-dark-900">Ticex</h2>
-            </div>
-
-            <nav class="hidden md:flex items-center gap-8 text-[15px] font-medium text-dark-500">
-                <a class="hover:text-brand-500 transition-colors" href="#features">Özellikler</a>
-                <a class="hover:text-brand-500 transition-colors" href="#pricing">Fiyatlandırma</a>
-                <a class="hover:text-brand-500 transition-colors" href="#resources">Kaynaklar</a>
-            </nav>
-
-            <div class="flex items-center gap-3">
-                <button class="hidden sm:flex h-10 px-4 items-center text-dark-900 text-sm font-bold hover:bg-slate-50 rounded-lg transition-colors">
-                    Giriş Yap
-                </button>
-                <button class="h-10 px-6 flex items-center bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold rounded-lg transition-all shadow-soft hover:shadow-lg hover:-translate-y-0.5">
-                    Ücretsiz Başla
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <section class="pt-16 pb-24 lg:pt-28 lg:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-brand-500 text-xs font-bold uppercase tracking-wide mb-8">
-                <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
-                Yeni Nesil Altyapı
-            </div>
-
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-dark-900 mb-6 leading-[1.15]">
-                Kendi <span id="type-text" class="text-brand-500 cursor"></span> <br class="hidden sm:block" />
-                Bugün Kurun.
-            </h1>
-
-            <p class="text-lg sm:text-xl text-dark-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-                Alan adı kaydından ödeme altyapısına, her şey dahil komisyonlu satış platformunuz. Kod bilgisi gerekmez, kurulum sadece dakikalar sürer.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button class="h-14 px-8 w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white text-base font-bold rounded-xl transition-all shadow-xl shadow-brand-500/20 hover:-translate-y-1">
-                    Hemen Başlayın
-                </button>
-                <button class="h-14 px-8 w-full sm:w-auto bg-white border-2 border-slate-100 text-dark-900 text-base font-bold rounded-xl hover:border-brand-500 hover:text-brand-500 transition-colors flex items-center justify-center gap-2">
-                    <span class="material-symbols-rounded">play_circle</span>
-                    Demo İzle
-                </button>
-            </div>
-
-            <div class="mt-16 relative mx-auto max-w-5xl">
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-slate-200 border border-slate-200 bg-white">
-                    <div class="bg-slate-50 border-b border-slate-100 h-10 flex items-center px-4 gap-2">
-                        <div class="flex gap-1.5">
-                            <div class="w-3 h-3 rounded-full bg-slate-200"></div>
-                            <div class="w-3 h-3 rounded-full bg-slate-200"></div>
-                        </div>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col group/design-root">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-3 text-slate-900 dark:text-white cursor-pointer">
+<div class="w-8 h-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Ticex</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#features">Özellikler</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#pricing">Fiyatlandırma</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#resources">Kaynaklar</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="hidden sm:flex h-10 px-4 items-center justify-center text-slate-700 dark:text-slate-200 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                        Giriş Yap
+                    </button>
+<button class="h-10 px-5 flex items-center justify-center bg-primary hover:bg-blue-600 text-white text-sm font-bold rounded-lg transition-all shadow-lg shadow-blue-500/20">
+                        Ücretsiz Başla
+                    </button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative pt-12 pb-20 lg:pt-24 lg:pb-32 overflow-hidden">
+<div class="absolute inset-0 -z-10 h-full w-full bg-background-light dark:bg-background-dark bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+<div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+<div class="flex flex-col gap-6 text-center lg:text-left z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 text-primary text-xs font-semibold uppercase tracking-wide w-fit mx-auto lg:mx-0">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        Yeni Nesil E-Ticaret
                     </div>
-                    <img alt="Dashboard" class="w-full h-auto object-cover" src="https://placehold.co/1200x675/f8fafc/cbd5e1?text=Ticex+Yönetim+Paneli+Arayüzü"/>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="border-y border-slate-100 bg-slate-50 py-10">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-sm font-bold text-dark-500 mb-8 uppercase tracking-wider opacity-60">Bizimle Büyüyen Markalar</p>
-            <div class="flex flex-wrap justify-center gap-10 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                <div class="flex items-center gap-2 text-xl font-black text-slate-700"><span class="material-symbols-rounded text-brand-500">diamond</span> Aura</div>
-                <div class="flex items-center gap-2 text-xl font-black text-slate-700"><span class="material-symbols-rounded text-brand-500">bolt</span> Voltan</div>
-                <div class="flex items-center gap-2 text-xl font-black text-slate-700"><span class="material-symbols-rounded text-brand-500">public</span> TechSphere</div>
-                <div class="flex items-center gap-2 text-xl font-black text-slate-700"><span class="material-symbols-rounded text-brand-500">water_drop</span> PureLife</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-white" id="features">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-black text-dark-900 mb-4 tracking-tight">Neden Ticex'i Seçmelisiniz?</h2>
-                <p class="text-lg text-dark-500">İşletmenizi dijital dünyada öne taşıyacak modern araçlar.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="group p-8 rounded-2xl border border-slate-100 hover:border-brand-500/30 hover:shadow-soft transition-all duration-300">
-                    <div class="w-12 h-12 bg-blue-50 text-brand-500 rounded-xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-rounded text-[28px]">settings_suggest</span>
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                        Kendi Pazar Yerinizi <br class="hidden lg:block"/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Bugün Kurun</span>
+</h1>
+<p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Alan adı kaydından ödeme altyapısına, her şey dahil komisyonlu satış platformunuz. Kod bilgisi gerektirmez.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-2">
+<button class="h-12 px-8 flex items-center justify-center bg-primary hover:bg-blue-600 text-white text-base font-bold rounded-lg transition-all shadow-xl shadow-blue-500/25">
+                            Ücretsiz Başlayın
+                        </button>
+<button class="h-12 px-8 flex items-center justify-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white text-base font-bold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors gap-2">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+                            Demo İzle
+                        </button>
+</div>
+<div class="flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500 dark:text-slate-400 mt-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span>
+<span>Kredi kartı gerekmez</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span>
+<span>14 gün ücretsiz deneme</span>
+</div>
+</div>
+</div>
+<div class="relative lg:h-auto z-0">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/20 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transform rotate-1 hover:rotate-0 transition-transform duration-500 ease-out">
+<img alt="Dashboard analytics interface showing charts and data graphs" class="w-full h-auto object-cover opacity-90" data-alt="Modern dashboard UI with charts and data tables on a screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaQ1i4cRniOopi29vSx_sUwlejzO0FjdgKYP6JT91xM_1fjw4i66IrF54r7-HCfJxjWssygmhkEGcH8QXxhM8_ZqYBCMYJTzHyD9GcWIHTuTIn__O7DTzg7vRiaWfCzivAf3FRGbhT_6uhmR0mIBfCdVGptNLFQpKvVkNt_R75ghAlFIQO-MUaaL8va6V5iQ7-PGH3YrtGt2uRbExBqpkXVjvLfRKo8nwzhBxgq0uN4gF28lXwPJJ3JhPT9hf9IodegEl7I-FZHg5y"/>
+<!-- Floating Element -->
+<div class="absolute -bottom-6 -left-6 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 animate-bounce [animation-duration:3s]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Aylık Büyüme</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">+124%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Proof -->
+<section class="border-y border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 py-10">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-8 uppercase tracking-wider">Bizimle Büyüyen Markalar</p>
+<div class="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+<!-- Placeholder Logos using Text/Icons for demo -->
+<div class="flex items-center gap-2 text-xl font-bold text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined">diamond</span> Aura Moda
                     </div>
-                    <h3 class="text-xl font-bold text-dark-900 mb-3">Kolay Kurulum</h3>
-                    <p class="text-dark-500 leading-relaxed">Kodlama yok. Sürükle bırak paneli ile dakikalar içinde mağazanızı yayınlayın.</p>
-                </div>
-                
-                <div class="group p-8 rounded-2xl border border-slate-100 hover:border-brand-500/30 hover:shadow-soft transition-all duration-300">
-                    <div class="w-12 h-12 bg-blue-50 text-brand-500 rounded-xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-rounded text-[28px]">payments</span>
+<div class="flex items-center gap-2 text-xl font-bold text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined">public</span> TechSphere
                     </div>
-                    <h3 class="text-xl font-bold text-dark-900 mb-3">Otomatik Komisyon</h3>
-                    <p class="text-dark-500 leading-relaxed">Satış gerçekleştiği an payınız hesabınıza geçer, kalanı satıcıya gider.</p>
-                </div>
-                
-                <div class="group p-8 rounded-2xl border border-slate-100 hover:border-brand-500/30 hover:shadow-soft transition-all duration-300">
-                    <div class="w-12 h-12 bg-blue-50 text-brand-500 rounded-xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-rounded text-[28px]">rocket_launch</span>
+<div class="flex items-center gap-2 text-xl font-bold text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined">bolt</span> Voltan
                     </div>
-                    <h3 class="text-xl font-bold text-dark-900 mb-3">Hızlı Büyüme</h3>
-                    <p class="text-dark-500 leading-relaxed">SEO uyumlu altyapı ve entegre pazarlama araçlarıyla satışlarınızı katlayın.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-slate-50 border-t border-slate-200 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8 mb-12">
-            <div class="col-span-1 md:col-span-2">
-                <div class="flex items-center gap-2 mb-4">
-                    <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center text-white">
-                         <span class="material-symbols-rounded text-[20px]">grid_view</span>
+<div class="flex items-center gap-2 text-xl font-bold text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined">water_drop</span> PureLife
                     </div>
-                    <span class="text-xl font-black text-dark-900">Ticex</span>
-                </div>
-                <p class="text-dark-500 text-sm max-w-xs">İşletmelerin kendi pazar yerlerini kurmalarını sağlayan lider altyapı sağlayıcısı.</p>
-            </div>
-            <div>
-                <h4 class="font-bold text-dark-900 mb-4">Ürün</h4>
-                <ul class="space-y-2 text-sm text-dark-500">
-                    <li><a href="#" class="hover:text-brand-500">Özellikler</a></li>
-                    <li><a href="#" class="hover:text-brand-500">Fiyatlar</a></li>
-                    <li><a href="#" class="hover:text-brand-500">Vitrin</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-dark-900 mb-4">Kurumsal</h4>
-                <ul class="space-y-2 text-sm text-dark-500">
-                    <li><a href="#" class="hover:text-brand-500">Hakkımızda</a></li>
-                    <li><a href="#" class="hover:text-brand-500">İletişim</a></li>
-                    <li><a href="#" class="hover:text-brand-500">Destek</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-slate-200 text-center text-sm text-dark-500">
-            © 2026 Ticex Teknoloji A.Ş. Tüm hakları saklıdır.
-        </div>
-    </footer>
-
-    <script>
-        const textElement = document.getElementById('type-text');
-        const phrases = ["Pazar Yerinizi", "E-Ticaret Sitenizi", "İş Modelinizi"];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function typeEffect() {
-            const currentPhrase = phrases[phraseIndex];
-            
-            if (isDeleting) {
-                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let speed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                speed = 2000; // Yazdıktan sonra bekleme süresi
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                speed = 500;
-            }
-
-            setTimeout(typeEffect, speed);
-        }
-
-        document.addEventListener('DOMContentLoaded', typeEffect);
-    </script>
-</body>
-</html>
+<div class="flex items-center gap-2 text-xl font-bold text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined">forest</span> GreenEarth
+                    </div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="py-24 bg-background-light dark:bg-background-dark" id="features">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">Neden Ticex'i Seçmelisiniz?</h2>
+<p class="text-lg text-slate-600 dark:text-slate-400">Platformumuzun sunduğu modern araçlarla işletmenizi dijital dünyada bir adım öne taşıyın.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">settings_suggest</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Kolay Kurulum</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Karmaşık kod yapılarıyla uğraşmadan, dakikalar içinde pazar yerinizi kurun ve satışa başlayın.
+                        </p>
+</div>
+<!-- Feature 2 -->
+<div class="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">payments</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Otomatik Komisyon</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Satıcılarınızdan alınacak komisyon oranlarını belirleyin, ödemeler otomatik olarak dağıtılsın.
+                        </p>
+</div>
+<!-- Feature 3 -->
+<div class="group bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+<div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">rocket_launch</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Hızlı Büyüme</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            SEO uyumlu altyapı ve entegre pazarlama araçlarıyla işletmenizi hızla ölçeklendirin.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonial Section -->
+<section class="py-24 bg-white dark:bg-slate-900 overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="lg:w-1/2 relative">
+<div class="absolute inset-0 bg-primary/20 rounded-full blur-[80px] -z-10"></div>
+<div class="relative rounded-2xl overflow-hidden aspect-square lg:aspect-[4/5] max-w-md mx-auto lg:mx-0">
+<img alt="Professional business woman smiling in modern office" class="w-full h-full object-cover" data-alt="Portrait of a confident businesswoman in a corporate setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXz9ik0sgjVp5oaojx1sQsJMkKR0ROqIH3ZMIPLtMzUv3WE0fHL4ZQsPA-7HHlpE61HvKybSfj6CKC34FdVOxGhLVXQYbSZSSxPFDRh-ZbppPvll9vFrwTnz4VDgfwoVgVwW8PIy3QoiNm0A7nrJzMldmZYVtkz6N6RbGQgzjUj-wTuVaSLxbHt5Z231HC379GIGLGeYzU1aTjsR0oHTbnKBwvXmCU08Q4Xm0SuTIRmUiqqZ8qyfSWoWPbr8U8Q90Ju8t8UcSmWo4C"/>
+<div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-8">
+<p class="text-white font-bold text-lg">Elif Yılmaz</p>
+<p class="text-slate-300 text-sm">Kurucu CEO, StilVagonu</p>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 space-y-8">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-yellow-400 fill-current">star</span>
+<span class="material-symbols-outlined text-yellow-400 fill-current">star</span>
+</div>
+<h2 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
+                            "Başarı Hikayeleri"
+                        </h2>
+<blockquote class="text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
+                            "Ticex sayesinde karmaşık altyapı sorunlarıyla uğraşmak yerine tamamen işimizi büyütmeye odaklandık. Otomatik komisyon sistemi bizim için tam bir oyun değiştirici oldu. Ciro artışımız ilk 6 ayda %300'ü geçti."
+                        </blockquote>
+<div class="pt-8 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<div class="text-left">
+<p class="text-4xl font-black text-primary">300%</p>
+<p class="text-sm text-slate-500">Ciro Artışı</p>
+</div>
+<div class="w-px h-12 bg-slate-200 dark:bg-slate-700"></div>
+<div class="text-left">
+<p class="text-4xl font-black text-primary">5k+</p>
+<p class="text-sm text-slate-500">Aktif Satıcı</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Mobile App Section -->
+<section class="py-24 bg-background-light dark:bg-background-dark relative">
+<div class="max-w-7xl mx-auto px-6">
+<div class="bg-primary rounded-3xl p-8 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-12 overflow-hidden relative">
+<!-- Background Pattern -->
+<div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 2px, transparent 2px); background-size: 32px 32px;"></div>
+<div class="flex flex-col gap-6 lg:w-1/2 z-10 text-center lg:text-left">
+<h2 class="text-3xl md:text-4xl font-black text-white mb-2">İşinizi Cebinizden Yönetin</h2>
+<p class="text-blue-100 text-lg mb-4">
+                            Ticex mobil uygulaması ile siparişleri takip edin, satıcılarınızla iletişim kurun ve raporlara anında erişin.
+                        </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+<button class="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-3 hover:bg-gray-900 transition-colors">
+<span class="material-symbols-outlined text-[28px]">ios</span>
+<div class="text-left">
+<div class="text-[10px] leading-tight text-gray-400">Download on the</div>
+<div class="text-sm font-bold leading-tight">App Store</div>
+</div>
+</button>
+<button class="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-3 hover:bg-gray-900 transition-colors">
+<span class="material-symbols-outlined text-[28px]">android</span>
+<div class="text-left">
+<div class="text-[10px] leading-tight text-gray-400">GET IT ON</div>
+<div class="text-sm font-bold leading-tight">Google Play</div>
+</div>
+</button>
+</div>
+</div>
+<div class="lg:w-1/2 flex justify-center lg:justify-end z-10">
+<div class="relative w-64 md:w-80 aspect-[1/2] bg-slate-900 rounded-[3rem] border-8 border-slate-900 shadow-2xl overflow-hidden">
+<img alt="Mobile app interface showing sales dashboard" class="w-full h-full object-cover" data-alt="Smartphone screen displaying a mobile application interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfQ_9CF4Yesj2vt9ncwxfe-Dwg_kj5Y2vsi5TRPOQqlb-GPT4GbQ6zSDqUHfq_V5p1f6yUXjJCScoJI1KLXuDGH5wPL2fpLzGb4Jw6yn6GcAmwIlXTRgkEOs6oQrIQCMFGbZfEbryp9ncFzEvIEqA0azjrSDs70jXuF7uSQZDAVX0f8tXj3aKe8O_5O3VjJ_8MbFSWho0KjF6oJuMma5OIjZyLrYjC2He5hCcuSgbDkBzfHMmKpU66oWmLKBP_BeJA0Ck6-c1FdOrF"/>
+<!-- Notch -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-24 bg-white dark:bg-slate-900">
+<div class="max-w-4xl mx-auto px-6 text-center">
+<h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
+                    E-ticaretin Geleceğine <br/> Ortak Olun
+                </h2>
+<p class="text-xl text-slate-600 dark:text-slate-400 mb-10">
+                    Binlerce girişimcinin tercih ettiği Ticex altyapısı ile bugün tanışın. Kurulum ücreti yok, gizli maliyet yok.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="h-14 px-10 flex items-center justify-center bg-primary hover:bg-blue-600 text-white text-lg font-bold rounded-lg transition-all shadow-xl shadow-blue-500/25">
+                        Hemen Kaydolun
+                    </button>
+<button class="h-14 px-10 flex items-center justify-center bg-transparent border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white text-lg font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">
+                        Satış Ekibiyle Görüşün
+                    </button>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+<div class="col-span-2 lg:col-span-2">
+<div class="flex items-center gap-2 text-slate-900 dark:text-white mb-6">
+<div class="w-8 h-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</div>
+<h2 class="text-xl font-bold">Ticex</h2>
+</div>
+<p class="text-slate-500 dark:text-slate-400 mb-6 max-w-sm">
+                            Ticex, işletmelerin kendi pazar yerlerini kurmalarını sağlayan lider altyapı sağlayıcısıdır. Güvenilir, hızlı ve ölçeklenebilir.
+                        </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-primary hover:border-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-primary hover:border-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">chat_bubble</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-primary hover:border-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">mail</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-4">Ürün</h3>
+<ul class="flex flex-col gap-3 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Özellikler</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Fiyatlandırma</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Entegrasyonlar</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sürümler</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-4">Şirket</h3>
+<ul class="flex flex-col gap-3 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Hakkımızda</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Kariyer</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">İletişim</a></li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white mb-4">Destek</h3>
+<ul class="flex flex-col gap-3 text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Yardım Merkezi</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">API Dokümantasyonu</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Topluluk</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Durum</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+<p>© 2026 Ticex Inc. Tüm hakları saklıdır.</p>
+<div class="flex gap-6">
+<a class="hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Gizlilik Politikası</a>
+<a class="hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Kullanım Şartları</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
