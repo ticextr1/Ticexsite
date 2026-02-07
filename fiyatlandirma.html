@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>Ticex - Paketler ve Fiyatlandırma</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2563EB", 
+                        "primary-dark": "#1d4ed8",
+                        "secondary": "#0F172A",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body, html { overflow-x: hidden; }
+        /* Toggle Switch Checkbox */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #2563EB;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #2563EB;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-[#0B1120] text-slate-900 dark:text-slate-100 font-body antialiased selection:bg-primary selection:text-white">
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-50 bg-white dark:bg-[#0B1120] hidden flex flex-col transition-all duration-300 transform translate-x-full" aria-hidden="true">
+        
+        <div class="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 flex items-center justify-center bg-primary rounded-lg text-white">
+                    <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Ticex</span>
+            </div>
+            <button id="close-menu" class="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors bg-slate-100 dark:bg-slate-800 rounded-full">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-6 px-6">
+            <nav class="space-y-2">
+                <a href="index.html" class="flex items-center gap-4 p-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-all group">
+                    <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">home</span>
+                    <span class="font-semibold text-lg">Ana Sayfa</span>
+                </a>
+                <a href="ozellikler.html" class="flex items-center gap-4 p-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-all group">
+                    <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">rocket_launch</span>
+                    <span class="font-semibold text-lg">Özellikler</span>
+                </a>
+                <a href="fiyatlandirma.html" class="flex items-center gap-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-primary transition-all group border border-blue-100 dark:border-blue-800">
+                    <span class="material-symbols-outlined text-primary">payments</span>
+                    <span class="font-bold text-lg">Fiyatlandırma</span>
+                </a>
+                <a href="iletisim.html" class="flex items-center gap-4 p-4 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-all group">
+                    <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">support_agent</span>
+                    <span class="font-semibold text-lg">İletişim</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-6 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-[#0F172A]">
+            <div class="grid grid-cols-2 gap-4">
+                <button class="flex items-center justify-center h-12 rounded-xl border border-slate-200 dark:border-slate-700 font-bold text-slate-700 dark:text-white bg-white dark:bg-slate-800 hover:bg-slate-50">
+                    Giriş Yap
+                </button>
+                <button class="flex items-center justify-center h-12 rounded-xl bg-primary text-white font-bold shadow-lg shadow-blue-500/20 hover:bg-primary-dark">
+                    Ücretsiz Dene
+                </button>
+            </div>
+            <p class="text-center text-xs text-slate-400 mt-4">© 2026 Ticex Teknoloji A.Ş.</p>
+        </div>
+    </div>
+    <header class="fixed top-0 w-full z-40 bg-white/80 dark:bg-[#0B1120]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                    <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary to-blue-600 rounded-xl text-white shadow-lg group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-105">
+                        <span class="material-symbols-outlined text-[24px]">grid_view</span>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">Ticex</span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="ozellikler.html">Özellikler</a>
+                    <a class="text-sm font-bold text-primary transition-colors" href="fiyatlandirma.html">Fiyatlandırma</a>
+                    <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="iletisim.html">İletişim</a>
+                </nav>
+
+                <div class="hidden md:flex items-center gap-4">
+                    <button class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Giriş Yap</button>
+                    <button class="h-10 px-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold rounded-lg hover:scale-105 transition-transform shadow-md">
+                        Hemen Başla
+                    </button>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="open-menu" class="p-2 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined text-3xl">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="pt-32 pb-24 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-blue-500/10 rounded-full blur-[120px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">
+                    İşinize Uygun <span class="text-primary">Şeffaf</span> Paketler
+                </h1>
+                <p class="text-xl text-slate-600 dark:text-slate-400 mb-10">
+                    Gizli ücret yok, kurulum bedeli yok. İster aylık ödeyin, isterseniz yıllık ödeyip %20 tasarruf edin.
+                </p>
+
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <span class="text-sm font-bold text-slate-900 dark:text-white" id="monthly-label">Aylık</span>
+                    <div class="relative inline-block w-14 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="price-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer top-1 left-1 border-slate-200 transition-all duration-300"/>
+                        <label for="price-toggle" class="toggle-label block overflow-hidden h-8 rounded-full bg-slate-200 dark:bg-slate-700 cursor-pointer transition-colors duration-300"></label>
+                    </div>
+                    <span class="text-sm font-bold text-slate-500 dark:text-slate-400" id="yearly-label">Yıllık <span class="text-green-500 text-xs ml-1 font-black uppercase">(-20%)</span></span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Başlangıç</h3>
+                    <p class="text-slate-500 text-sm mb-6">Yeni başlayan girişimciler için.</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-slate-900 dark:text-white price-text" data-monthly="299" data-yearly="239">299</span>
+                        <span class="text-lg font-bold text-slate-900 dark:text-white">₺</span>
+                        <span class="text-slate-400 text-sm">/ay</span>
+                    </div>
+                    <button class="w-full py-3 rounded-xl border-2 border-slate-100 dark:border-slate-700 font-bold text-slate-700 dark:text-white hover:border-primary hover:text-primary transition-all mb-8">
+                        Şimdi Başla
+                    </button>
+                    <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> 100 Ürün Limiti</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> %2.9 Komisyon</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Hazır Site Şablonu</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> E-posta Desteği</li>
+                        <li class="flex items-center gap-3 text-slate-400 line-through"><span class="material-symbols-outlined text-slate-400 text-[20px]">close</span> Kendi Alan Adı</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-primary shadow-2xl relative transform md:-translate-y-4">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-600 to-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+                        En Çok Tercih Edilen
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Profesyonel</h3>
+                    <p class="text-slate-500 text-sm mb-6">Büyüyen işletmeler için.</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-slate-900 dark:text-white price-text" data-monthly="599" data-yearly="479">599</span>
+                        <span class="text-lg font-bold text-slate-900 dark:text-white">₺</span>
+                        <span class="text-slate-400 text-sm">/ay</span>
+                    </div>
+                    <button class="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark shadow-lg shadow-blue-500/25 transition-all mb-8">
+                        14 Gün Ücretsiz Dene
+                    </button>
+                    <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> 5.000 Ürün Limiti</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> %1.5 Komisyon</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Kendi Alan Adı (Domain)</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Gelişmiş SEO Araçları</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Öncelikli Canlı Destek</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Kurumsal</h3>
+                    <p class="text-slate-500 text-sm mb-6">Büyük hacimli mağazalar için.</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-slate-900 dark:text-white price-text" data-monthly="1299" data-yearly="999">1.299</span>
+                        <span class="text-lg font-bold text-slate-900 dark:text-white">₺</span>
+                        <span class="text-slate-400 text-sm">/ay</span>
+                    </div>
+                    <button class="w-full py-3 rounded-xl border-2 border-slate-100 dark:border-slate-700 font-bold text-slate-700 dark:text-white hover:border-primary hover:text-primary transition-all mb-8">
+                        Satış Ekibiyle Görüş
+                    </button>
+                    <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Sınırsız Ürün</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> %0.5 Komisyon</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Özel Entegrasyonlar</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Özel Müşteri Temsilcisi</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500 text-[20px]">check</span> Çoklu Depo Yönetimi</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-50 dark:bg-[#080c14]">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-2xl font-bold text-center text-slate-900 dark:text-white mb-10">Ödeme ile İlgili Sorular</h2>
+            <div class="space-y-4">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Paket değiştirebilir miyim?</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Evet, dilediğiniz zaman paketinizi yükseltebilir veya düşürebilirsiniz. Yükseltmelerde aradaki fark, düşürmelerde ise kalan süre hesabınıza kredi olarak yansır.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Komisyon oranları nasıl hesaplanır?</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Komisyon oranları KDV dahil satış fiyatı üzerinden hesaplanır ve ödeme altyapısı ücretleri paketinize dahildir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white dark:bg-[#0B1120] border-t border-slate-200 dark:border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center text-slate-500 dark:text-slate-400 text-sm">
+            <p>© 2026 Ticex Teknoloji A.Ş. <br> Tüm fiyatlara KDV dahildir.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. YENİ MOBİL MENÜ MANTIĞI (IKAS STYLE) ---
+        const menuBtn = document.getElementById('open-menu');
+        const closeBtn = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('mobile-menu-overlay');
+
+        function toggleMenu() {
+            const isHidden = menuOverlay.classList.contains('hidden');
+            if (isHidden) {
+                // Açılış
+                menuOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    menuOverlay.classList.remove('translate-x-full');
+                }, 10);
+                document.body.style.overflow = 'hidden'; // Kaydırmayı kilitle
+            } else {
+                // Kapanış
+                menuOverlay.classList.add('translate-x-full');
+                setTimeout(() => {
+                    menuOverlay.classList.add('hidden');
+                }, 300); // Animasyon süresi kadar bekle
+                document.body.style.overflow = ''; // Kaydırmayı aç
+            }
+        }
+
+        if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
+        if(closeBtn) closeBtn.addEventListener('click', toggleMenu);
+
+        // --- 2. FİYAT TOGGLE MANTIĞI ---
+        const toggle = document.getElementById('price-toggle');
+        const prices = document.querySelectorAll('.price-text');
+        const monthlyLabel = document.getElementById('monthly-label');
+        const yearlyLabel = document.getElementById('yearly-label');
+
+        toggle.addEventListener('change', function() {
+            const isYearly = this.checked;
+            
+            // Etiket renklerini güncelle
+            if(isYearly) {
+                monthlyLabel.classList.replace('text-slate-900', 'text-slate-500');
+                yearlyLabel.classList.replace('text-slate-500', 'text-slate-900');
+                if(document.body.classList.contains('dark')) {
+                     monthlyLabel.classList.replace('text-white', 'text-slate-400');
+                     yearlyLabel.classList.replace('text-slate-400', 'text-white');
+                }
+            } else {
+                monthlyLabel.classList.replace('text-slate-500', 'text-slate-900');
+                yearlyLabel.classList.replace('text-slate-900', 'text-slate-500');
+                if(document.body.classList.contains('dark')) {
+                     monthlyLabel.classList.replace('text-slate-400', 'text-white');
+                     yearlyLabel.classList.replace('text-white', 'text-slate-400');
+                }
+            }
+
+            // Fiyatları güncelle
+            prices.forEach(price => {
+                const newVal = isYearly ? price.dataset.yearly : price.dataset.monthly;
+                // Basit bir animasyon efekti için
+                price.style.opacity = 0;
+                setTimeout(() => {
+                    price.innerText = newVal;
+                    price.style.opacity = 1;
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
